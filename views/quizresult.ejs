@@ -1,11 +1,14 @@
+<%- include('partials/header.ejs') %>
+
 <!-- Exam Helper -->
     <section id="title">
         <div class="px-4 pt-5 my-5 text-center">
             <h1 class="display-4 fw-bold">Exam Helper</h1>
             <div class="col-lg-6 mx-auto border-bottom">
-                <p class="lead mb-4">
-                    Believe in yourself, stay sharp, and crush this quiz!
-                </p>
+                <p class="lead mb-4">Total MCQs: <%= totalQuestions %></p>
+                <p class="lead mb-4">Correct MCQs:  <span class="text-success"><%= correctMCQs %></span> </p>
+                <p class="lead mb-4">Wrong MCQs:  <span class="text-danger"><%= wrongMCQS %></span></p>
+                <p class="lead mb-4">Left MCQs:  <span class="text-danger"><%= leftMCQS %></span></p>
             </div>
         </div>
     </section>
@@ -99,3 +102,6 @@
             </div>
         </div>
     </section>
+
+
+<%- include('partials/footer.ejs') %>

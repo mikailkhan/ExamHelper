@@ -4,9 +4,12 @@
         <div class="px-4 pt-5 my-5 text-center">
             <h1 class="display-4 fw-bold">Exam Helper</h1>
             <div class="col-lg-6 mx-auto border-bottom">
-                <p class="lead mb-4">
-                    Believe in yourself, stay sharp, and crush this quiz!
-                </p>
+                <% if (locals.hasOwnProperty("examCompleted")) { %>
+                 <p class="lead mb-4 fw-bold">Your Score: <%= correctMCQs %> / <%= totalQuestions %></p>
+                <% } else { %>
+                    <p class="lead mb-4">Believe in yourself, stay sharp, and crush this quiz!</p>
+                <% } %>
+                
             </div>
         </div>
     </section>
@@ -16,38 +19,80 @@
         <div class="container d-flex justify-content-center mb-5">
             <div class="col-md-6">
                 <form method="POST" action="/quizresult">
-                    <% for( let i = 0; i < mcqs.length; i++ ) { %>
+                    <% for( let i = 0; i < quiz.mcqs.length; i++ ) { %>
                         <div class="mcq mb-5 border-bottom">
-                        <fieldset id="mcqfield<%=i+1%>"  class="p-5">
-                            <p class="h4 mb-4"><%= i+1 %>. <%= mcqs[i].question %></p>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="mcq<%=i+1%>" id="mcq<%=i+1%>" value="A">
+                        <fieldset id="mcqfield<%=i+1%>"  class="p-5 <% if (locals.examCompleted) {%> bg-light <%} %>">
+                            <p class="h4 mb-4"><%= i+1 %>. <%= quiz.mcqs[i].question %></p>
+                            <div class="form-check <% if (quiz.mcqs[i].choosenOption == "A") { if (quiz.mcqs[i].result=="correct") {%>
+                             bg-success text-white py-3 ps-5
+                            <% } else {%>
+                                    bg-danger text-white py-3 ps-5
+                                <%}} %>">
+                                <input class="form-check-input" type="radio" name="mcq<%=i+1%>" id="mcq<%=i+1%>" value="A" <% if (locals.examCompleted) {if (quiz.mcqs[i].choosenOption == "A"){%>
+                                    checked 
+                                    <%} else {%> 
+                                        disabled
+                                        <% }} %> >
                                 <label class="form-check-label" for="mcq<%=i+1%>">
-                                    A. <%= mcqs[i].a %>
+                                    A. <%= quiz.mcqs[i].a %>
                                 </label>
                             </div>
 
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="mcq<%=i+1%>" id="mcq<%=i+1%>" value="B">
+                            <div class="form-check <% if (quiz.mcqs[i].choosenOption == "B") { if (quiz.mcqs[i].result=="correct") {%>
+                             bg-success text-white py-3 ps-5
+                            <% } else {%>
+                                    bg-danger text-white py-3 ps-5
+                                <%}} %>">
+                                <input class="form-check-input" type="radio" name="mcq<%=i+1%>" id="mcq<%=i+1%>" value="B" <% if (locals.examCompleted) { if (quiz.mcqs[i].choosenOption == "B"){%>
+                                    checked 
+                                    <%} else {%> 
+                                        disabled
+                                        <% }} %> >
                                 <label class="form-check-label" for="mcq<%=i+1%>">
-                                    B. <%= mcqs[i].b %>
+                                    B. <%= quiz.mcqs[i].b %>
                                 </label>
                             </div>
 
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="mcq<%=i+1%>" id="mcq<%=i+1%>" value="C">
+                            <div class="form-check <% if (quiz.mcqs[i].choosenOption == "C") { if (quiz.mcqs[i].result=="correct") {%>
+                             bg-success text-white py-3 ps-5
+                            <% } else {%>
+                                    bg-danger text-white py-3 ps-5
+                                <%}} %>">
+                                <input class="form-check-input" type="radio" name="mcq<%=i+1%>" id="mcq<%=i+1%>" value="C" <% if (locals.examCompleted) { if (quiz.mcqs[i].choosenOption == "C"){%>
+                                    checked 
+                                    <%} else {%> 
+                                        disabled
+                                        <% }} %> >
                                 <label class="form-check-label" for="mcq<%=i+1%>">
-                                    C. <%= mcqs[i].c %>
+                                    C. <%= quiz.mcqs[i].c %>
                                 </label>
                             </div>
 
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="mcq<%=i+1%>" id="mcq<%=i+1%>" value="D">
+                            <div class="form-check <% if (quiz.mcqs[i].choosenOption == "D") { if (quiz.mcqs[i].result=="correct") {%>
+                             bg-success text-white py-3 ps-5
+                            <% } else {%>
+                                    bg-danger text-white py-3 ps-5
+                                <%}} %>">
+                                <input class="form-check-input" type="radio" name="mcq<%=i+1%>" id="mcq<%=i+1%>" value="D" <%if (locals.examCompleted) { if (quiz.mcqs[i].choosenOption == "D"){%>
+                                    checked 
+                                    <%} else {%> 
+                                        disabled
+                                        <% }} %> >
                                 <label class="form-check-label" for="mcq<%=i+1%>">
-                                    D. <%= mcqs[i].d %>
+                                    D. <%= quiz.mcqs[i].d %>
                                 </label>
                             </div>
+                            <% if (locals.examCompleted) { %>
+                              <p class="mt-4"><em><b>Answer:</b> <%= quiz.mcqs[i].answer%></em></p>
+                            <% } %>
+                           
                         </fieldset>
+                        <% if (locals.examCompleted) { %>
+                        <div class="explaination p-2 m-4">
+                            <p class="display-6">Explaination</p>
+                            <p><%= quiz.mcqs[i].explaination %></p>
+                        </div>
+                        <% } %>
                     </div>
                     <% } %>
                     <div class="d-grid col-6 mx-auto ">

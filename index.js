@@ -83,8 +83,11 @@ app.post("/start", async (req, res) => {
 });
 
 app.get("/quiz",(req, res)=>{
+    let quizData = {
+        quiz: structuredMCQS
+    }
     if (structuredMCQS) {
-        res.render("quiz.ejs", structuredMCQS);
+        res.render("quiz.ejs", quizData);
     } else {
         res.redirect(302, "/");
     }
@@ -118,16 +121,18 @@ app.post("/quizresult", (req, res) => {
     leftMCQS = totalQuestions - correctMCQS - wrongMCQS;
     examCompleted = true;
 
-    quizData = {
+    let quizData = {
         examCompleted:  examCompleted,
         totalQuestions: totalQuestions,
-        correctMCQ:  correctMCQS,
+        correctMCQs:  correctMCQS,
         wrongMCQS: wrongMCQS,
         leftMCQS: leftMCQS,
         quiz: structuredMCQS
     }
 
-    res.render("quizresult.ejs", quizData);
+    console.log(quizData);
+
+    res.render("quiz.ejs", quizData);
 });
 
 app.get("/review",(req, res)=>{
