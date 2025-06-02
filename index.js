@@ -13,6 +13,8 @@ const app = express();
 
 dotenv.config();
 
+const totalQuestions = 4;
+let examCompleted = false;
 
 let structuredMCQS;
 
@@ -43,9 +45,6 @@ app.get("/", (req, res)=>{
 
 app.post("/start", async (req, res) => {
     
-    const numberOfMCQs = 5;
-    const numberOfReviewQuestions = 10;
-    
     const subject = req.body.subject;
     const topic = req.body.topic;
     const content = req.body.content;
@@ -54,7 +53,7 @@ app.post("/start", async (req, res) => {
 
     if (type == "quiz") {
         // quiz 
-         instructions = `Generate a MCQ-based quiz with ${numberOfMCQs} questions from the information in the following format: Question A B C D Answer Explaination`; 
+         instructions = `Generate a MCQ-based quiz with ${totalQuestions} questions from the information in the following format: Question A B C D Answer Explaination`; 
     } else {
         // Review Questions
     }
@@ -98,17 +97,37 @@ app.post("/quizresult", (req, res) => {
     let wrongMCQS = 0;
     let leftMCQS = 0;
 
-    for (const key in answerMCQs) {
-        
+    for (const key in answerMCQs) {        
         // Removes the mcq part from the name to return the number of the mcq
         let answeredMCQNumber = parseInt(key.slice(3)) - 1; 
-        
-        if (structuredMCQS.mcqs[answeredMCQNumber].answer == answerMCQs[key]) {
-            Object.defineProperty(structuredMCQS.mcqs[answeredMCQNumber], "result", "correct");
-        } 
+        let chosenMCQ = structuredMCQS.mcqs[answeredMCQNumber];
+
+        if (chosenMCQ.answer.toLowerCase() == answerMCQs[key].toLowerCase()) {
+            chosenMCQ.filled = 1;
+            chosenMCQ.choosenOption = answerMCQs[key];
+            chosenMCQ.result = "correct";
+            correctMCQS++;
+        } else  {
+            chosenMCQ.filled = 1;
+            chosenMCQ.choosenOption = answerMCQs[key];
+            chosenMCQ.result = "wrong";
+            wrongMCQS++;
+        }
     }
-    
-    console.log(structuredMCQS.mcqs);
+
+    leftMCQS = totalQuestions - correctMCQS - wrongMCQS;
+    examCompleted = true;
+
+    quizData = {
+        examCompleted:  examCompleted,
+        totalQuestions: totalQuestions,
+        correctMCQ:  correctMCQS,
+        wrongMCQS: wrongMCQS,
+        leftMCQS: leftMCQS,
+        quiz: structuredMCQS
+    }
+
+    res.render("quizresult.ejs", quizData);
 });
 
 app.get("/review",(req, res)=>{
