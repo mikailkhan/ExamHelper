@@ -44,8 +44,10 @@
                                 Topic Review Questions 🔥
                             </label>
                         </div>
-                        <label for="customRange3" class="form-label my-3">Questions </label>
-                        <input type="range" class="form-range" min="10" max="50" step="10" id="customRange3">
+                        
+                        <label for="questionRange" class="form-label my-3">Questions <output id="rangeValue">1</output></label>
+                        <input name="totalQuestions" type="range" class="form-range" min="1" max="20" step="1" value="1" id="questionRange" oninput="document.getElementById('rangeValue').value = this.value">
+                        
                     </div>
                     <button type="submit" class="btn btn-primary my-4">Start ❇️</button>
                 </form>

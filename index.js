@@ -13,7 +13,7 @@ const app = express();
 
 dotenv.config();
 
-const totalQuestions = 4;
+const totalQuestions = 0;
 let examCompleted = false;
 
 let structuredMCQS;
@@ -49,6 +49,8 @@ app.post("/start", async (req, res) => {
     const topic = req.body.topic;
     const content = req.body.content;
     const type = req.body.type;
+    totalQuestions = req.body.totalQuestions;
+    let prompt = `{Subject: ${subject}}, \n {Topic: ${topic}}, \n {Topic Content: ${content}}`;
     let instructions = "";
 
     if (type == "quiz") {
@@ -56,9 +58,10 @@ app.post("/start", async (req, res) => {
          instructions = `Generate a MCQ-based quiz with ${totalQuestions} questions from the information in the following format: Question A B C D Answer Explaination`; 
     } else {
         // Review Questions
+        
     }
 
-    let prompt = `{Subject: ${subject}}, \n {Topic: ${topic}}, \n {Topic Content: ${content}}`;
+    
 
     const response = await client.responses.parse({
     model: 'gpt-4o',
