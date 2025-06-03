@@ -13,7 +13,7 @@ const app = express();
 
 dotenv.config();
 
-const totalQuestions = 0;
+let totalQuestions = 0;
 let examCompleted = false;
 
 let structuredMCQS;
@@ -58,7 +58,7 @@ app.post("/start", async (req, res) => {
          instructions = `Generate a MCQ-based quiz with ${totalQuestions} questions from the information in the following format: Question A B C D Answer Explaination`; 
     } else {
         // Review Questions
-        
+
     }
 
     
