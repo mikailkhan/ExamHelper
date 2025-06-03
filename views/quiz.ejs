@@ -27,7 +27,9 @@
                              bg-success text-white py-3 ps-5
                             <% } else {%>
                                     bg-danger text-white py-3 ps-5
-                                <%}} %>">
+                                <%}} else if (locals.examCompleted && quiz.mcqs[i].answer.toUpperCase() == "A") { %> 
+                                    border border-success py-3 ps-5
+                            <% } %>">
                                 <input class="form-check-input" type="radio" name="mcq<%=i+1%>" id="mcq<%=i+1%>" value="A" <% if (locals.examCompleted) {if (quiz.mcqs[i].choosenOption == "A"){%>
                                     checked 
                                     <%} else {%> 
@@ -42,7 +44,9 @@
                              bg-success text-white py-3 ps-5
                             <% } else {%>
                                     bg-danger text-white py-3 ps-5
-                                <%}} %>">
+                                <%}} else if (locals.examCompleted && quiz.mcqs[i].answer.toUpperCase() == "B") { %> 
+                                   border border-success py-3 ps-5
+                                <%} %>">
                                 <input class="form-check-input" type="radio" name="mcq<%=i+1%>" id="mcq<%=i+1%>" value="B" <% if (locals.examCompleted) { if (quiz.mcqs[i].choosenOption == "B"){%>
                                     checked 
                                     <%} else {%> 
@@ -57,7 +61,9 @@
                              bg-success text-white py-3 ps-5
                             <% } else {%>
                                     bg-danger text-white py-3 ps-5
-                                <%}} %>">
+                                <%}}  else if (locals.examCompleted && quiz.mcqs[i].answer.toUpperCase() == "C") { %> 
+                                   border border-success py-3 ps-5
+                            <% } %>">
                                 <input class="form-check-input" type="radio" name="mcq<%=i+1%>" id="mcq<%=i+1%>" value="C" <% if (locals.examCompleted) { if (quiz.mcqs[i].choosenOption == "C"){%>
                                     checked 
                                     <%} else {%> 
@@ -70,9 +76,11 @@
 
                             <div class="form-check <% if (quiz.mcqs[i].choosenOption == "D") { if (quiz.mcqs[i].result=="correct") {%>
                              bg-success text-white py-3 ps-5
-                            <% } else {%>
+                            <% }  else {%>
                                     bg-danger text-white py-3 ps-5
-                                <%}} %>">
+                                <%}} else if (locals.examCompleted && quiz.mcqs[i].answer.toUpperCase() == "D") { %> 
+                                   border border-success py-3 ps-5
+                            <% } %>">
                                 <input class="form-check-input" type="radio" name="mcq<%=i+1%>" id="mcq<%=i+1%>" value="D" <%if (locals.examCompleted) { if (quiz.mcqs[i].choosenOption == "D"){%>
                                     checked 
                                     <%} else {%> 
@@ -96,7 +104,7 @@
                     </div>
                     <% } %>
                     <div class="d-grid col-6 mx-auto ">
-                        <input type="submit" class="btn btn-danger">
+                        <input type="submit" class="btn btn-danger" <% if (locals.examCompleted) { %>value=" Generate Report " <% } %>>
                     </div>
                 </form>
             </div>
