@@ -234,7 +234,7 @@ app.post("/reviewresult", async (req, res) => {
 
 
     checkedResponse.feedback.forEach(eachFeedback => {
-        totalObtainedMarks += eachFeedback.obtainedMarks;
+        totalObtainedMarks += parseFloat(eachFeedback.obtainedMarks);
         let key = parseInt(eachFeedback.userAnswerKey.slice(6)) - 1;
         structuredQuestions.exam[key].obtainedMarks = eachFeedback.obtainedMarks;
         structuredQuestions.exam[key].feedback = eachFeedback.feedback;
@@ -243,7 +243,8 @@ app.post("/reviewresult", async (req, res) => {
     let reviewExamData = {
         examCompleted: true,
         review: structuredQuestions,
-        totalObtainedMarks: totalObtainedMarks
+        totalObtainedMarks: totalObtainedMarks,
+        totalMarks: totalMarks
     };
 
 

@@ -6,7 +6,11 @@
             <h1 class="display-4 fw-bold">Exam Helper</h1>
             <div class="col-lg-6 mx-auto border-bottom">
                 <p class="lead mb-4">
-                    Believe in yourself, stay sharp, and crush this exam!
+                    <% if (!locals.examCompleted) { %>
+                        Believe in yourself, stay sharp, and crush this exam!
+                    <% } else {%>
+                        Your Marks <span class="text-primary fw-bold"> <%= totalObtainedMarks %> / <%= totalMarks %></span>     
+                    <% } %>
                 </p>
             </div>
         </div>
@@ -33,10 +37,10 @@
                             <% if (locals.examCompleted) { %>
                              <div class="explaination p-2 m-4">
                                 <p class="display-6">Exlaination</p>
-                                <p class="fw-bold">Marking Scheme</p>
-                                <p><%= review.exam[i].markingScheme %></p>
                                 <p class="fw-bold">Feedback</p>
                                 <p><%= review.exam[i].feedback %></p>
+                                <p class="fw-bold">Marking Scheme</p>
+                                <p><%= review.exam[i].markingScheme %></p>
                              </div>
                             <% } %>
                              
