@@ -248,7 +248,6 @@ app.post("/reviewresult", async (req, res) => {
 
 
     res.render("review.ejs", reviewExamData);
-    console.log(reviewExamData);
 });
 
 // Server Start
