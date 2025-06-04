@@ -230,9 +230,6 @@ app.post("/reviewresult", async (req, res) => {
 
     let checkedResponse = response.output_parsed;
 
-    // console.log(checkedResponse);
-
-
     checkedResponse.feedback.forEach(eachFeedback => {
         totalObtainedMarks += parseFloat(eachFeedback.obtainedMarks);
         let key = parseInt(eachFeedback.userAnswerKey.slice(6)) - 1;
