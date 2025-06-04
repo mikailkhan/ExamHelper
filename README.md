@@ -19,7 +19,7 @@ This is a Node.js application.
 Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/ExamHelper.git
+git clone https://github.com/mikailkhan/ExamHelper.git
 cd ExamHelper
 ```
 
