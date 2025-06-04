@@ -51,6 +51,38 @@ node index.js
 
 Follow the on-screen instructions to begin creating or managing exams.
 
+## Screen Recordings
+### Home
+Home page
+![quizprep](https://github.com/user-attachments/assets/614ef1ac-1381-4089-a7b9-2db85cffdb4f)
+
+### Quiz
+
+Quiz Exam page
+
+#### Questions
+
+![quiz](https://github.com/user-attachments/assets/632f88f9-e9e7-4348-989b-698c57f55d5a)
+
+#### Answers
+
+![quiz2](https://github.com/user-attachments/assets/d1e3d3cb-341c-4e30-9185-c04a0098a598)
+
+
+
+### Review Exam
+
+Review Exam page
+
+#### Questions
+
+![review1](https://github.com/user-attachments/assets/de887f73-0357-4fbe-b921-55b922364cf5)
+
+#### Answers
+
+![review2](https://github.com/user-attachments/assets/974d7ac1-32d8-4258-a4a1-8c8417573d4d)
+
+
 ## Contributing
 
 Contributions are welcome! Please open issues or submit pull requests for improvements.
